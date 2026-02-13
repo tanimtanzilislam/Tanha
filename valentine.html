@@ -3,545 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Valentine Card 💖</title>
-  <meta name="description" content="A cute animated Valentine card" />
+  <title>Valentine 💗</title>
   <style>
-    :root{
-      --bg1:#120018; --bg2:#2b0028;
-      --pink:#ff5aa5; --rose:#ff2e7a; --peach:#ffd1e6;
-      --text:#ffeef7;
-      --glass: rgba(255,255,255,.10);
-      --glass2: rgba(255,255,255,.06);
-      --shadow: 0 30px 80px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      overflow:hidden;
-      background:
-        radial-gradient(1200px 900px at 20% 10%, rgba(255,90,165,.20), transparent 55%),
-        radial-gradient(1000px 700px at 80% 30%, rgba(255,46,122,.18), transparent 60%),
-        radial-gradient(900px 700px at 50% 90%, rgba(255,209,230,.12), transparent 60%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
+      margin:0; height:100vh; display:grid; place-items:center;
+      font-family: system-ui, Arial;
+      background: radial-gradient(circle at top, #ffb3d9, #2b0028 60%, #120018);
+      overflow:hidden; color:#fff;
     }
-    .aurora{
-      position:fixed; inset:-20%;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,90,165,.22), transparent 55%),
-        radial-gradient(circle at 70% 40%, rgba(255,46,122,.18), transparent 55%),
-        radial-gradient(circle at 50% 70%, rgba(255,209,230,.14), transparent 58%);
-      filter: blur(40px) saturate(120%);
-      animation: drift 10s ease-in-out infinite alternate;
-      pointer-events:none;
-      opacity:.9;
-    }
-    @keyframes drift{
-      from{transform:translate3d(-2%, -1%, 0) scale(1.02) rotate(-1deg)}
-      to{transform:translate3d(2%, 1%, 0) scale(1.06) rotate(1deg)}
-    }
-
-    .hearts,.sparkles,.confetti{
-      position:fixed; inset:0; pointer-events:none; overflow:hidden;
-    }
-
-    .wrap{height:100%; display:grid; place-items:center; padding:22px; position:relative;}
     .card{
-      width:min(980px, 95vw);
-      height:min(580px, 84vh);
-      border-radius:28px;
-      background: linear-gradient(180deg, var(--glass), var(--glass2));
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-      transform: translateZ(0);
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: conic-gradient(
-        from 180deg at 50% 50%,
-        rgba(255,90,165,.0),
-        rgba(255,90,165,.22),
-        rgba(255,209,230,.14),
-        rgba(255,46,122,.20),
-        rgba(255,90,165,.0)
-      );
-      filter: blur(30px);
-      animation: spin 9s linear infinite;
-      opacity:.55;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    .content{
-      position:relative;
-      height:100%;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
+      width:min(420px, 92vw);
+      background: rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:24px;
       padding:22px;
-      z-index:2;
-    }
-    @media (max-width: 860px){
-      body{overflow:auto}
-      .card{height:auto; min-height: 720px}
-      .content{grid-template-columns:1fr; padding:18px}
-    }
-
-    /* Photo area (no external images needed) */
-    .photoFrame{
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.16);
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      min-height: 320px;
-      position:relative;
-      display:grid;
-      place-items:center;
-      padding:18px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.45);
       text-align:center;
-    }
-    .photoFrame::before{
-      content:"";
-      position:absolute; inset:-20%;
-      background:
-        radial-gradient(280px 220px at 25% 35%, rgba(255,209,230,.18), transparent 60%),
-        radial-gradient(260px 220px at 70% 70%, rgba(255,90,165,.16), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.18));
-      filter: blur(2px);
-    }
-    .avatar{
       position:relative;
-      width:min(280px, 80%);
-      aspect-ratio: 1 / 1;
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.18);
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255,238,247,.95), rgba(255,90,165,.32) 45%, rgba(255,46,122,.18) 70%, rgba(0,0,0,.06)),
-        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      box-shadow: 0 18px 48px rgba(0,0,0,.30);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
     }
-    .avatar .emoji{
-      font-size: clamp(58px, 8vw, 88px);
-      filter: drop-shadow(0 16px 22px rgba(0,0,0,.25));
-      animation: floaty 1.8s ease-in-out infinite alternate;
-    }
-    @keyframes floaty{to{transform:translateY(-7px)}}
-    .avatar small{
-      position:absolute;
-      bottom:12px; left:12px; right:12px;
-      opacity:.92;
-      font-weight:650;
-      letter-spacing:.2px;
-    }
-
-    .badge{
-      margin-top:14px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.08);
-    }
-    .mini{display:flex; align-items:center; gap:10px}
-    .dot{
-      width:12px;height:12px;border-radius:99px;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--pink));
-      box-shadow: 0 0 18px rgba(255,90,165,.8);
-      animation: pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse{50%{transform:scale(1.35); opacity:.75}}
-
-    .title{
-      font-size: clamp(28px, 3.6vw, 48px);
-      line-height:1.05;
-      margin:0;
-      text-shadow: 0 10px 30px rgba(0,0,0,.35);
-      letter-spacing:.2px;
-    }
-    .title .beat{
+    h1{margin:0 0 8px; font-size:30px}
+    p{margin:0 0 16px; opacity:.95; line-height:1.5}
+    .heart{
+      font-size:56px;
       display:inline-block;
-      animation: beat 1.1s ease-in-out infinite;
-      transform-origin:center;
+      animation: beat 1.1s infinite;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,.25));
     }
     @keyframes beat{
       0%,100%{transform:scale(1)}
-      40%{transform:scale(1.18)}
-      60%{transform:scale(1.06)}
+      40%{transform:scale(1.2)}
+      60%{transform:scale(1.07)}
     }
-
-    .sub{margin:10px 0 0; opacity:.92; font-size:15.5px; line-height:1.55;}
-
-    .noteBox{
-      margin-top:14px;
-      border-radius:22px;
-      padding:16px 16px 14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.14);
-      box-shadow: 0 16px 36px rgba(0,0,0,.30);
-      position:relative;
-      overflow:hidden;
-    }
-    .noteBox::before{
-      content:"";
-      position:absolute; inset:-60% -60%;
-      background: radial-gradient(circle at 50% 50%, rgba(255,90,165,.18), transparent 55%);
-      filter: blur(16px);
-      animation: drift2 6.5s ease-in-out infinite alternate;
-      opacity:.9;
-    }
-    @keyframes drift2{from{transform:translate(-3%,-2%)} to{transform:translate(3%,2%)}}
-
-    .note{
-      position:relative;
-      font-size: 16px;
-      line-height:1.6;
-      margin:0;
-      white-space:pre-wrap;
-      min-height: 140px;
-    }
-    .cursor{
-      display:inline-block;
-      width:.6ch;
-      margin-left:2px;
-      background: rgba(255,238,247,.9);
-      border-radius:2px;
-      transform: translateY(2px);
-      animation: blink 1s steps(1) infinite;
-    }
-    @keyframes blink{50%{opacity:0}}
-
-    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
     button{
-      border:0;
+      border:0; cursor:pointer;
+      padding:12px 16px;
       border-radius:999px;
-      padding:11px 14px;
-      font-weight:650;
-      letter-spacing:.2px;
-      color:var(--text);
-      cursor:pointer;
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 14px 28px rgba(0,0,0,.22);
-      transition: transform .12s ease, background .12s ease;
+      background: #ff2e7a;
+      color:white; font-weight:700;
+      box-shadow: 0 15px 35px rgba(255,46,122,.35);
+      transition:.15s;
     }
-    button:hover{transform: translateY(-2px); background: rgba(255,255,255,.14)}
-    button:active{transform: translateY(0px) scale(.99)}
-    .primary{
-      background: linear-gradient(135deg, rgba(255,90,165,.95), rgba(255,46,122,.88));
-      border: 1px solid rgba(255,255,255,.20);
-      box-shadow: 0 18px 40px rgba(255,46,122,.28);
-    }
+    button:hover{transform:translateY(-2px)}
+    button:active{transform:translateY(0)}
 
-    /* Cover overlay WITHOUT backdrop-filter (Vercel safe + no blur perf issues) */
-    .cover{
-      position:absolute; inset:0;
-      display:grid; place-items:center;
-      background:
-        radial-gradient(700px 520px at 50% 40%, rgba(255,90,165,.22), transparent 60%),
-        rgba(0,0,0,.28);
-      z-index:10;
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .cover.hidden{opacity:0; pointer-events:none; transform: scale(1.02);}
-    .seal{
-      width:min(560px, 92%);
-      border-radius:26px;
-      padding:18px 18px 16px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .seal h2{margin:0 0 6px 0; font-size: clamp(22px, 3.2vw, 34px);}
-    .seal p{margin:0 0 14px 0; opacity:.9; line-height:1.5}
-    .seal .kiss{
-      font-size:34px; display:inline-block;
-      animation: floaty 1.8s ease-in-out infinite alternate;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
-    }
-
-    /* Floating heart element */
-    .heart{
-      position:absolute;
-      width: 16px; height: 16px;
-      transform: rotate(45deg);
+    /* floating hearts */
+    .h{
+      position:fixed;
+      left:50%;
+      bottom:-30px;
+      font-size:18px;
+      animation: floatUp linear forwards;
       opacity:.9;
-      filter: drop-shadow(0 10px 12px rgba(0,0,0,.25));
+      pointer-events:none;
     }
-    .heart::before,.heart::after{
-      content:"";
-      position:absolute;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: inherit;
+    @keyframes floatUp{
+      from{transform:translateX(0) translateY(0) scale(1); opacity:.9}
+      to{transform:translateX(var(--x)) translateY(-110vh) scale(1.4); opacity:0}
     }
-    .heart::before{left:-8px; top:0}
-    .heart::after{left:0; top:-8px}
-
-    .spark{
-      position:absolute;
-      width:6px; height:6px;
-      border-radius:99px;
-      background: rgba(255,238,247,.95);
-      box-shadow: 0 0 18px rgba(255,238,247,.65);
-      opacity:.9;
-      animation: twinkle var(--t) ease-in-out infinite;
-    }
-    @keyframes twinkle{
-      0%,100%{transform:scale(.65); opacity:.45}
-      50%{transform:scale(1.4); opacity:.95}
-    }
-
-    .piece{
-      position:absolute;
-      width:8px; height:12px;
-      border-radius:2px;
-      background: rgba(255,255,255,.8);
-      opacity:.95;
-      transform: translateY(-20px) rotate(0deg);
-      animation: fall var(--d) ease-in forwards;
-    }
-    @keyframes fall{
-      to{transform: translateY(120vh) rotate(240deg); opacity:0}
-    }
-
-    .footer{
-      margin-top:12px;
-      opacity:.78;
-      font-size:12.5px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .footer span{white-space:nowrap}
+    .tip{font-size:12px; opacity:.75; margin-top:10px}
   </style>
 </head>
-
 <body>
-  <div class="aurora"></div>
-  <div class="hearts" id="hearts"></div>
-  <div class="sparkles" id="sparkles"></div>
-  <div class="confetti" id="confetti"></div>
-
-  <main class="wrap">
-    <section class="card" aria-label="Valentine card">
-      <div class="cover" id="cover">
-        <div class="seal">
-          <div class="kiss">💌</div>
-          <h2>Tap to open your Valentine</h2>
-          <p>A little card with big feelings 💗</p>
-          <button class="primary" id="openBtn">Open the Card ✨</button>
-        </div>
-      </div>
-
-      <div class="content">
-        <div>
-          <div class="photoFrame">
-            <div class="avatar">
-                <img src="girl.jpeg" alt="">
-              <div class="emoji">👑💖</div>
-              <small>For Tanha....</small>
-            </div>
-          </div>
-          <div class="badge">
-            <div class="mini">
-              <div class="dot"></div>
-              <div>
-                <b>Valentine Mode</b><br/>
-                <small>hearts + sparkles</small>
-              </div>
-            </div>
-            <small id="dateTag"></small>
-          </div>
-        </div>
-
-        <div>
-          <h1 class="title">Happy Valentine’s Day <span class="beat">💖</span></h1>
-          <p class="sub">A tiny website that feels like a hug — with sweet animations and a message that types itself.</p>
-
-          <div class="noteBox">
-            <p class="note"><span id="typed"></span><span class="cursor" aria-hidden="true"></span></p>
-          </div>
-
-          <div class="actions">
-            <button class="primary" id="loveBtn">Send Extra Love 💞</button>
-            <button id="moreHeartsBtn">More Hearts 💗</button>
-            <button id="toggleSparklesBtn">Toggle Sparkles ✨</button>
-            <button id="copyBtn">Copy Message 📋</button>
-          </div>
-
-          <div class="footer">
-            <span>Made with ❤️</span>
-            <span id="hint">Tip: press “Send Extra Love”</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <div class="card">
+    <div class="heart">💖</div>
+    <h1>Happy Valentine’s Day</h1>
+    <p id="msg">You make my day brighter, my heart softer, and my smile real 💗</p>
+    <button id="btn">Send Love 💞</button>
+    <div class="tip">Tap the button a few times ✨</div>
+  </div>
 
   <script>
-    // ✅ Customize message here
-    const LOVE_MESSAGE =
-`You are the kind of person that makes everything feel softer and brighter.
+    const btn = document.getElementById("btn");
+    const msg = document.getElementById("msg");
 
-If I could, I’d gift you:
-• a thousand warm hugs
-• endless smiles
-• and a day that feels as beautiful as you are
+    const messages = [
+      "You make my day brighter, my heart softer, and my smile real 💗",
+      "If I could, I’d give you a thousand hugs today 🤍",
+      "You’re my favorite kind of magic ✨",
+      "I’m lucky to know you — Happy Valentine’s Day 💖"
+    ];
 
-Happy Valentine’s Day 💗`;
-
-    // Date tag
-    const dateTag = document.getElementById("dateTag");
-    dateTag.textContent = new Date().toLocaleDateString(undefined, {
-      weekday:"short", year:"numeric", month:"short", day:"numeric"
-    });
-
-    // Typewriter
-    const typedEl = document.getElementById("typed");
-    let i = 0;
-    function typeNext(){
-      if (i <= LOVE_MESSAGE.length){
-        typedEl.textContent = LOVE_MESSAGE.slice(0, i);
-        i++;
-        setTimeout(typeNext, 18 + Math.random()*28);
+    function heartBurst(n=14){
+      for(let i=0;i<n;i++){
+        const el = document.createElement("div");
+        el.className = "h";
+        el.textContent = Math.random() > 0.2 ? "💗" : "✨";
+        el.style.left = (Math.random()*100) + "vw";
+        el.style.setProperty("--x", (Math.random()*240 - 120) + "px");
+        el.style.animationDuration = (2.6 + Math.random()*1.8) + "s";
+        document.body.appendChild(el);
+        setTimeout(()=> el.remove(), 5000);
       }
     }
 
-    // Layers
-    const heartsLayer = document.getElementById("hearts");
-    const sparklesLayer = document.getElementById("sparkles");
-    const confettiLayer = document.getElementById("confetti");
-
-    function rand(min, max){ return Math.random() * (max - min) + min; }
-
-    // Hearts
-    function makeHeart({x, size, duration, drift, opacity}){
-      const h = document.createElement("div");
-      h.className = "heart";
-      const hue = rand(320, 350);
-      h.style.background = `hsla(${hue}, 100%, ${rand(64, 74)}%, ${opacity})`;
-      h.style.left = `${x}px`;
-      h.style.bottom = `-24px`;
-      h.style.width = `${size}px`;
-      h.style.height = `${size}px`;
-
-      const anim = h.animate([
-        { transform: `translate(0, 0) rotate(45deg) scale(1)`, opacity },
-        { transform: `translate(${drift}px, -110vh) rotate(45deg) scale(${rand(.9, 1.3)})`, opacity: 0 }
-      ], {
-        duration,
-        easing: "cubic-bezier(.2,.8,.2,1)",
-        fill: "forwards"
-      });
-
-      anim.onfinish = () => h.remove();
-      heartsLayer.appendChild(h);
-    }
-
-    function burstHearts(count=14){
-      for (let k=0; k<count; k++){
-        makeHeart({
-          x: rand(window.innerWidth*0.2, window.innerWidth*0.8),
-          size: rand(14, 26),
-          duration: rand(4200, 7600),
-          drift: rand(-150, 150),
-          opacity: rand(.65, .95)
-        });
-      }
-    }
-
-    setInterval(() => {
-      makeHeart({
-        x: rand(0, window.innerWidth),
-        size: rand(10, 20),
-        duration: rand(5200, 9200),
-        drift: rand(-90, 90),
-        opacity: rand(.55, .9)
-      });
-    }, 240);
-
-    // Sparkles
-    let sparklesOn = true;
-    function spawnSparkles(n=34){
-      sparklesLayer.innerHTML = "";
-      for (let s=0; s<n; s++){
-        const sp = document.createElement("div");
-        sp.className = "spark";
-        sp.style.left = `${rand(0, window.innerWidth)}px`;
-        sp.style.top  = `${rand(0, window.innerHeight)}px`;
-        sp.style.setProperty("--t", `${rand(1.2, 3.2)}s`);
-        sp.style.opacity = rand(.35, .95);
-        sparklesLayer.appendChild(sp);
-      }
-    }
-    spawnSparkles();
-
-    // Confetti
-    function popConfetti(pieces=90){
-      for (let c=0; c<pieces; c++){
-        const p = document.createElement("div");
-        p.className = "piece";
-        const hue = rand(320, 360);
-        p.style.background = `hsla(${hue}, 100%, ${rand(70, 85)}%, .95)`;
-        p.style.left = `${rand(0, window.innerWidth)}px`;
-        p.style.top  = `${rand(-20, window.innerHeight*0.2)}px`;
-        p.style.setProperty("--d", `${rand(2.2, 4.4)}s`);
-        p.style.width = `${rand(6, 10)}px`;
-        p.style.height= `${rand(10, 16)}px`;
-        confettiLayer.appendChild(p);
-        setTimeout(() => p.remove(), 5200);
-      }
-    }
-
-    // Cover open
-    const cover = document.getElementById("cover");
-    const openBtn = document.getElementById("openBtn");
-    openBtn.addEventListener("click", () => {
-      cover.classList.add("hidden");
-      popConfetti(120);
-      burstHearts(18);
-      if (!typedEl.textContent) typeNext();
-    });
-    cover.addEventListener("click", (e) => {
-      if (e.target.id === "cover") openBtn.click();
+    btn.addEventListener("click", () => {
+      msg.textContent = messages[Math.floor(Math.random()*messages.length)];
+      heartBurst(18);
     });
 
-    // Buttons
-    document.getElementById("loveBtn").addEventListener("click", () => {
-      popConfetti(140);
-      burstHearts(24);
-      document.getElementById("hint").textContent = "More love delivered 💞";
-    });
-    document.getElementById("moreHeartsBtn").addEventListener("click", () => burstHearts(26));
-    document.getElementById("toggleSparklesBtn").addEventListener("click", () => {
-      sparklesOn = !sparklesOn;
-      sparklesLayer.style.display = sparklesOn ? "block" : "none";
-    });
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(LOVE_MESSAGE);
-        document.getElementById("hint").textContent = "Copied 💌";
-      }catch{
-        document.getElementById("hint").textContent = "Copy blocked — select & copy manually 💗";
-      }
-    });
-
-    window.addEventListener("resize", () => { if (sparklesOn) spawnSparkles(); });
-    setTimeout(() => { if (!cover.classList.contains("hidden")) burstHearts(10); }, 900);
+    // gentle background hearts automatically
+    setInterval(()=>heartBurst(2), 700);
   </script>
 </body>
 </html>
